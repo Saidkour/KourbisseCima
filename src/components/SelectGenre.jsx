@@ -9,8 +9,8 @@ export default function SelectGenre() {
     <>
       <select
         className={`p-2 ${
-          dark ? "bg-gray-700" : "bg-white"
-        }  focus:border rounded border-none`}
+          dark ? "bg-gray-700" : "bg-gray-200 text-black"
+        }  focus:border rounded border-none px-4 py-2 m-auto`}
         onChange={(e) => {
           dispatch({ type: SET_PAGE });
           dispatch({ type: SET_GENRE, payload: e.currentTarget.value });

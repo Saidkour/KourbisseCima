@@ -24,7 +24,7 @@ const initialState = {
   searchVal: "",
   page: 1,
   genre:"",
-  dark:false,
+  dark:true,
   loading: false,
 };
 

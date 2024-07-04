@@ -5,9 +5,9 @@ import {
   SET_PAGE_Decrement,
   SET_PAGE_Increment,
   SET_PAGE_Total,
-  SET_TOTAL_PAGES,
 } from "../redux/actionTypes";
-import CardMovie from "./cardMovie";
+import CardMovie from "../components/cardMovie";
+import Search from "../components/Search";
 
 function Home() {
   const movies = useSelector((state) => state.movies);
@@ -25,6 +25,9 @@ function Home() {
 
   return (
     <>
+        <div className="sm:hidden">
+         <Search/>
+         </div>
       <div className="container block m-auto">
         {loading ? (
           <div className="w-full h-[250px]">
@@ -54,15 +57,23 @@ function Home() {
                   ? dispatch({ type: SET_PAGE })
                   : dispatch({ type: SET_PAGE_Decrement });
               }}
-              className={`join-item btn  ${!dark?"bg-gray-200 text-black":""}`}
+              className={`join-item btn  ${
+                !dark ? "bg-gray-200 text-black" : ""
+              }`}
             >
               «
             </button>
-            <button className={`join-item btn  ${!dark?"bg-gray-200 text-black":""}`}>
+            <button
+              className={`join-item btn  ${
+                !dark ? "bg-gray-200 text-black" : ""
+              }`}
+            >
               Page {page} /{totalPages}
             </button>
             <button
-              className={`join-item btn  ${!dark?"bg-gray-200 text-black":""}`}
+              className={`join-item btn  ${
+                !dark ? "bg-gray-200 text-black" : ""
+              }`}
               onClick={() => {
                 page == totalPages
                   ? dispatch({ type: SET_PAGE_Total })

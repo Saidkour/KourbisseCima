@@ -1,17 +1,20 @@
 import React, { useCallback, useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import Nav from "./Nav";
+import Nav from "../components/Nav";
 import { useDispatch, useSelector } from "react-redux";
-import { SET_GENRES, SET_LOADING,SET_MOVIES,SET_TOTAL_PAGES } from "../redux/actionTypes";
+import {
+  SET_GENRES,
+  SET_LOADING,
+  SET_MOVIES,
+  SET_TOTAL_PAGES,
+  TOOGLE_DARK
+} from "../redux/actionTypes";
 
 const Layout = () => {
   const search = useSelector((state) => state.search);
   const page = useSelector((state) => state.page);
   const genre = useSelector((state) => state.genre);
   const dispatch = useDispatch();
-
-
-
   const fetchMovies = useCallback(() => {
     const url =
       search !== ""
@@ -29,7 +32,7 @@ const Layout = () => {
       .finally(() => {
         dispatch({ type: SET_LOADING, payload: false });
       });
-  }, [search,genre, page]);
+  }, [search, genre, page]);
   useEffect(() => {
     fetchMovies();
   }, [fetchMovies]);
@@ -49,10 +52,17 @@ const Layout = () => {
 
     fetchGenres();
   }, []);
-
   const dark = useSelector((state) => state.dark);
+  // useEffect(() => {
+  //   const storedDarkMode = localStorage.getItem("darkMode");
+  //   if (storedDarkMode) {
+  //     dispatch({ type: TOOGLE_DARK, payload: storedDarkMode });
+  //   } else {
+  //     localStorage.setItem("darkMode", dark);
+  //   }
+  // }, [dark]);
   return (
-    <div className={dark?"":"bg-white"}>
+    <div className={dark ? "" : "bg-white"}>
       <Nav />
       <main className="">
         <Outlet />

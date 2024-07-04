@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const CardMovie = ({ item }) => {
   const dark = useSelector((state) => state.dark);
@@ -7,9 +8,9 @@ const CardMovie = ({ item }) => {
     <div
       className={`${
         item.poster_path ? "" : "hidden"
-      } hover:opacity-[0.9] text-center overflow-hidden rounded-xl shadow-md transition-shadow`}
+      } hover:opacity-[0.9] text-center sm:hover:scale-105 ease-in-out overflow-hidden rounded-xl shadow-md transition-shadow`}
     >
-      <div className="relative  sm:max-w-[300px] h-auto">
+      <div className="relative sm:max-w-[300px] h-auto">
         <span className="absolute text-white top-2 right-2 bg-yellow-400 p-1 rounded-xl">
           {item.vote_average.toFixed(1)}
           <svg
@@ -27,13 +28,30 @@ const CardMovie = ({ item }) => {
             />
           </svg>
         </span>
-        <a href={`/movie/${item.id}`}>
+        <Link to={`/movie/${item.id}`}>
         <img
           src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-          className="w-full h-full sm:w-[280px] sm:h-[340px] cursor-pointer overflow-hidden"
+          className="w-full h-full sm:w-[280px] hover:opacity-50 sm:h-[340px] cursor-pointer overflow-hidden"
           alt={item.name}
         />
-        </a>
+        </Link>
+        
+        <div className="hidden sm:block group absolute hover:shadow-md hover:scale-110  cursor-pointer shadow-lg w-8 h-8 group-hover:grid  place-content-center rounded-full right-0 left-[125px] bottom-0 top-40 z-50">
+        <Link to={`/movie/${item.id}`}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="currentColor"
+            className="w-10 h-10  text-white bg-black rounded-full p-2 bg-transparent hover:bg-indigo-600 hover:text-black transition-all duration-300 ease-in-out"
+            viewBox="0 0 16 16"
+          >
+            <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+            <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+          </svg>
+        </Link>
+      </div>
+
       </div>
       <span className={`flex justify-evenly ${!dark?"text-black":""} font-semibold my-5`}>
         {item?.name}
