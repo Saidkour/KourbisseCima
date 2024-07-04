@@ -1,27 +1,29 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {  TOOGLE_DARK } from "../redux/actionTypes";
+import {  RESET_STATE, TOOGLE_DARK } from "../redux/actionTypes";
 
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Search from "./Search";
 
 const Nav = () => {
   const dark = useSelector((state) => state.dark);
   const dispatch = useDispatch();
+  const location = useLocation();
+  const isGenrePage = location.pathname === "/genre";
   return (
     <nav className="">
       <div className="px-4 mx-auto flex justify-between items-center py-4 shadow-md ">
         <div>
           <Link to="/">
-            <h2 className="text-2xl text-indigo-600  font-bold">Movie App</h2>
+            <h2 onClick={()=>dispatch({type:RESET_STATE})} className="text-2xl text-indigo-600  font-bold">Movie App</h2>
           </Link>
         </div>
          <div className="hidden sm:block ">
-         <Search/>
+         {!isGenrePage && <Search />}
          </div>
         <div>
-          <div class="sm:ml-6">
-            <div class="flex space-x-4">
+          <div className="sm:ml-6">
+            <div className="flex space-x-4">
               <Link
                 to={"/"}
                 className={`rounded-md  px-3 py-2 text-sm font-medium ${

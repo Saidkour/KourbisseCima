@@ -10,3 +10,4 @@ export const SET_LOADING = "SET_LOADING";
 export const SET_PAGE = "SET_PAGE";
 export const SET_PAGE_Total = "SET_PAGE_Total";
 export const TOOGLE_DARK = "TOOGLE_DARK";
+export const RESET_STATE = "RESET_STATE";

@@ -8,8 +8,18 @@ import {
 } from "../redux/actionTypes";
 import CardMovie from "../components/cardMovie";
 import Search from "../components/Search";
+import { useLocation } from "react-router-dom";
 
 function Home() {
+
+  const location = useLocation();
+
+  // Check if the current path is "/genre"
+  const isGenrePage = location.pathname === "/genre";
+
+  // Render the Search component conditionally based on the path
+  
+
   const movies = useSelector((state) => state.movies);
   const search = useSelector((state) => state.search);
   const page = useSelector((state) => state.page);
@@ -26,7 +36,7 @@ function Home() {
   return (
     <>
         <div className="sm:hidden">
-         <Search/>
+        {!isGenrePage && <Search />}
          </div>
       <div className="container block m-auto">
         {loading ? (

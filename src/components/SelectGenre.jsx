@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { SET_GENRE, SET_PAGE } from "../redux/actionTypes";
+import { SET_GENRE, SET_PAGE ,RESET_STATE } from "../redux/actionTypes";
 
 export default function SelectGenre() {
   const dispatch = useDispatch();
@@ -14,6 +14,7 @@ export default function SelectGenre() {
         onChange={(e) => {
           dispatch({ type: SET_PAGE });
           dispatch({ type: SET_GENRE, payload: e.currentTarget.value });
+          dispatch({ type: RESET_STATE });
         }}
         name="genre"
         id="genre"

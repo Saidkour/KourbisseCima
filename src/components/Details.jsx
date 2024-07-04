@@ -8,16 +8,17 @@ const Details = () => {
   const dark = useSelector((state) => state.dark);
   const { id } = useParams();
   const movies = useSelector((state) => state.movies);
-  const movie = movies?.find((movie) => movie.id === parseInt(id));
+  const movie = movies.find((movie) => movie.id === parseInt(id));
+  console.log(movie);
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, [movie]);
   return (
     <>
-      {movie?.title ? (
+      {movie ? (
         <div>
           <main className="relative  px-6 py-5 lg:px-8">
-            <div className='absolute top-0 left-0 w-full h-full bg-[url("/bg-img.jpg")] opacity-[0.95]  bg-cover bg-center z-[-1]'></div>
+            <div className={`absolute top-0 left-0 w-full h-full bg-[url("/bg-img.jpg")] opacity-[0.95]  bg-cover bg-center z-[-1]`}></div>
             <div className="absolute bg-black w-full h-full left-0 right-0 bottom-0 opacity-[0.40] bg-cover z-[-1] bg-center top-0"></div>
 
             <div
@@ -43,7 +44,7 @@ const Details = () => {
                     dark ? "text-white" : "text-black"
                   }`}
                 >
-                  <span className="font-bold uppercase ">description : </span>
+                  <span className="font-bold text-2xl uppercase ">description : </span>
                   <span className="block m-auto"> {movie.overview}</span>
                 </p>
                 <p
@@ -98,7 +99,7 @@ const Details = () => {
             </div>
           </main>
           <div className="mt-6">
-            <h2 className="text-center font-bold text-2xl text-white">
+            <h2 className={`text-center font-bold text-2xl ${dark?"text-white":"text-black"} `}>
               Related Movies
             </h2>
             <hr className="w-[500px] m-auto mt-5" />

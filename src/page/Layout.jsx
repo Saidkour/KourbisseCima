@@ -7,8 +7,9 @@ import {
   SET_LOADING,
   SET_MOVIES,
   SET_TOTAL_PAGES,
-  TOOGLE_DARK
+  TOOGLE_DARK,
 } from "../redux/actionTypes";
+import Footer from "./Footer";
 
 const Layout = () => {
   const search = useSelector((state) => state.search);
@@ -17,7 +18,7 @@ const Layout = () => {
   const dispatch = useDispatch();
   const fetchMovies = useCallback(() => {
     const url =
-      search !== ""
+      search !== "" && search !== undefined && page !== 0
         ? `https://api.themoviedb.org/3/search/tv?api_key=fef55a6754f2f6d00a0038388915039c&include_adult=true&query=${search}&page=${page}`
         : `https://api.themoviedb.org/3/discover/movie?include_adult=true&include_video=false&page=${page}&with_genres=${genre}&sort_by=popularity.desc&api_key=fef55a6754f2f6d00a0038388915039c`;
     dispatch({ type: SET_LOADING, payload: true });
@@ -53,20 +54,13 @@ const Layout = () => {
     fetchGenres();
   }, []);
   const dark = useSelector((state) => state.dark);
-  // useEffect(() => {
-  //   const storedDarkMode = localStorage.getItem("darkMode");
-  //   if (storedDarkMode) {
-  //     dispatch({ type: TOOGLE_DARK, payload: storedDarkMode });
-  //   } else {
-  //     localStorage.setItem("darkMode", dark);
-  //   }
-  // }, [dark]);
   return (
     <div className={dark ? "" : "bg-white"}>
       <Nav />
-      <main className="">
+      <main>
         <Outlet />
       </main>
+      <Footer/>
     </div>
   );
 };

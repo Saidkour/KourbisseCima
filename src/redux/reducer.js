@@ -11,6 +11,7 @@ import {
   SET_PAGE_Total,
   SET_LOADING,
   TOOGLE_DARK,
+  RESET_STATE,
 } from "./actionTypes";
 
 // Import the necessary action types
@@ -18,13 +19,13 @@ import {
 // Define the initial state
 const initialState = {
   movies: [],
-  genres:[],
+  genres: [],
   totalPages: 0,
   search: "",
   searchVal: "",
   page: 1,
-  genre:"",
-  dark:true,
+  genre: "",
+  dark: true,
   loading: false,
 };
 
@@ -36,16 +37,22 @@ const reducer = (state = initialState, action) => {
         ...state,
         movies: action.payload,
       };
-      case SET_GENRES:
-        return {
-          ...state,
-          genres: action.payload,
-        };
-        case SET_GENRE:
-        return {
-          ...state,
-          genre: action.payload,
-        };
+    case RESET_STATE:
+      return {
+      ...state,
+      search:"",
+      searchVal:"",
+      };
+    case SET_GENRES:
+      return {
+        ...state,
+        genres: action.payload,
+      };
+    case SET_GENRE:
+      return {
+        ...state,
+        genre: action.payload,
+      };
     case SET_TOTAL_PAGES:
       return {
         ...state,
