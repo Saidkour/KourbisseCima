@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import ErrorPage from "./ErrorPage";
@@ -9,7 +9,9 @@ const Details = () => {
   const { id } = useParams();
   const movies = useSelector((state) => state.movies);
   const movie = movies?.find((movie) => movie.id === parseInt(id));
-  console.log(movie?.title)
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [movie]);
   return (
     <>
       {movie?.title ? (
